@@ -9,7 +9,7 @@ by integrating the retreival system with a generative model to find the most rel
 
 ## Objective
 
-I wanted just to play with a RAG system by using `faiss`, `sentence-transformers` and `transformers`, and combine them togther using `langchain` (just playing).
+build a simple RAG system using `faiss`, `sentence-transformers` and `transformers`, and combine them togther using `langchain`. deploy the application using `fastapi` and `docker`.
 
 ## Methodology
 1. for the documents:

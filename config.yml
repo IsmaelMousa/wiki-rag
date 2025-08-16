@@ -1,0 +1,19 @@
+document:
+  level           : "token"
+  model_name      : "gpt2"
+  chunk_size      : 256
+  chunk_overlap   : 0
+  separators      : null
+
+model:
+  embedding       : "all-MiniLM-L6-v2"
+  pretrained_model: "HuggingFaceTB/SmolLM2-135M-Instruct"
+  search_type     : "similarity"
+  k               : 2
+  max_new_tokens  : 256
+
+app:
+  host            : "localhost"
+  port            : 8000
+  path            : "wiki"
+  version         : "0.1.0"

@@ -29,6 +29,7 @@ def root():
     """
     return {"message": "RAG system say hello!"}
 
+
 @router.get("/documents", status_code=200)
 def load(query: str):
     """
@@ -41,6 +42,7 @@ def load(query: str):
 
     return {"message": documents}
 
+
 @router.get("/model", status_code=200)
 def load():
     """
@@ -48,10 +50,11 @@ def load():
 
     :return: embedding, tokenizer and generative model.
     """
-    retriever = load_retriever(embedding=config.model.embedding)["message"]
+    retriever = load_retriever(embedding       =config.model.embedding)       ["message"]
     generator = load_generator(pretrained_model=config.model.pretrained_model)["message"]
 
     return {"message": {"retriever": retriever, "generator": generator}}
+
 
 @router.post(path="/model", status_code=200)
 def generate(query: Query):
@@ -61,15 +64,15 @@ def generate(query: Query):
     :param query: the query as an object.
     :return: context-aware answer.
     """
-    documents = chunk_documents(**config.document.__dict__)
+    documents = chunk_documents      (**config.document.__dict__)
 
-    embedding = load_retriever(embedding=config.model.embedding)["retriever"]
+    embedding = load_retriever       (embedding=config.model.embedding)["retriever"]
 
-    vectordb  = FAISS.from_documents(documents=documents, embedding=embedding)
+    vectordb  = FAISS.from_documents (documents=documents, embedding=embedding)
 
     retriever = vectordb.as_retriever(search_type=config.model.search_type, k=config.model.k)
 
-    generator = load_generator(pretrained_model=config.model.pretrained_model)
+    generator = load_generator       (pretrained_model=config.model.pretrained_model)
 
     tokenizer = generator["tokenizer"]
     model     = generator["model"]

@@ -20,7 +20,7 @@ def load_documents(query: str):
         documents = WikipediaLoader(query=query).load()
 
         for index, document in enumerate(documents):
-            with open(os.path.join(path, f"{index}.txt"), "w", encoding="utf-8") as file:
+            with open(os.path.join(path, f"{index}.txt"), mode="w", encoding="utf-8") as file:
                 file.write(document.page_content)
 
         return len(documents)
@@ -51,7 +51,7 @@ def chunk_documents(level        : str = "token",
         return "documents not loaded, call the `load` function first."
 
     for document in os.listdir(path=path):
-        with open(os.path.join(path, document), "r", encoding="utf-8") as file:
+        with open(os.path.join(path, document), mode="r", encoding="utf-8") as file:
             documents.append(file.read())
 
     documents = [Document(page_content=document) for document in documents]
@@ -69,9 +69,9 @@ def chunk_documents(level        : str = "token",
                                                       chunk_overlap=chunk_overlap,
                                                       separators   =separators)
         case _:
-            splitter = TokenTextSplitter(chunk_size                 =chunk_size,
-                                         chunk_overlap              =chunk_overlap,
-                                         model_name                 =model_name)
+            splitter = TokenTextSplitter(chunk_size                =chunk_size,
+                                         chunk_overlap             =chunk_overlap,
+                                         model_name                =model_name)
 
     documents = splitter.split_documents(documents=documents)
 
